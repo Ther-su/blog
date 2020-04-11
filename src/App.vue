@@ -1,32 +1,72 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <menu-list></menu-list>
+    <img-box id="img-box"></img-box>
+    <div class="container">
+      <router-view></router-view>
+      <div>
+        <info-box></info-box>
+        <click-box></click-box>
+      </div>
     </div>
-    <router-view/>
   </div>
 </template>
 
+<script>
+import menuList from './components/menu.vue'
+import imgBox from './components/imgBox.vue'
+import infoBox from './components/infoBox.vue'
+import clickBox from './components/clickBox.vue'
+export default {
+  components: {
+    menuList,
+    imgBox,
+    infoBox,
+    clickBox
+  },
+  mounted () {
+    setTimeout(() => {
+      window.L2Dwidget.init({
+        pluginRootPath: 'live2dw/',
+        pluginJsPath: 'lib/',
+        pluginModelPath: 'live2d-widget-model-koharu/assets/',
+        tagMode: false,
+        debug: false,
+        model: { jsonPath: '../live2dw/live2d-widget-model-koharu/assets/koharu.model.json' },
+        display: { position: 'right', width: 200, height: 300 },
+        mobile: { show: true },
+        log: false
+      })
+    }, 1000)
+  }
+}
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+  * {
+  margin: 0px;
+  padding: 0px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+  html {
+    width: 100vw;
+    overflow-x: hidden;
+  }
+  @media screen and (max-width: 600px) {
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #efefef;
+    }
+  }
+  @media screen and (min-width: 600px) {
+    .container {
+      position: relative;
+      width: 100vw;
+      display: grid;
+      grid-template-columns: 70% 30%;
+      background-color: #efefef;
+    }
+  }
 </style>
