@@ -4,9 +4,21 @@ import router from './router'
 import axios from 'axios'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/googlecode.css'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 
 Vue.config.productionTip = false
+NProgress.inc(0.2)
+NProgress.configure({ easing: 'ease', speed: 500, showSpinner: false })
 axios.defaults.baseURL = 'http://localhost:8080/'
+axios.interceptors.request.use(config => {
+  NProgress.start()
+  return config
+})
+axios.interceptors.response.use(config => {
+  NProgress.done()
+  return config
+})
 Vue.directive('highlight', function (el) {
   const blocks = el.querySelectorAll('pre code')
   blocks.forEach((block) => {
