@@ -64,10 +64,8 @@ export default {
   methods: {
     change (value, render) {
       this.article.content = render
-      console.log(this.article.content)
     },
     imgChange (e) {
-      console.log(e)
       const img = e.target.files[0]
       const reader = new FileReader()
       reader.readAsDataURL(img)
@@ -77,10 +75,8 @@ export default {
     },
     editSubmit () {
       this.article.time = Date.now()
-      console.log(this.article)
       this.$http.post('edit', this.article)
         .then((ret) => {
-          console.log(ret)
           if (ret.status !== 200) {
             alert('上传失败')
           }

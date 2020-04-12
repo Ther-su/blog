@@ -49,7 +49,6 @@ export default {
           aid: this.$route.params.id,
           comment: this.num + 1
         }
-        console.log(info)
         this.$http.post('/comment', info)
           .then((ret) => {
             if (ret.status !== 200) {
@@ -68,7 +67,6 @@ export default {
           comment: this.num + 1
           // apply: []
         }
-        console.log(info)
         this.$http.post('/reply', info)
           .then((ret) => {
             if (ret.status !== 200) {
@@ -80,7 +78,6 @@ export default {
       }
     },
     changeCommentBox (index, name, rid) {
-      console.log(rid)
       this.newName = name
       this.type = 2
       this.index = index

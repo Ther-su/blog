@@ -21,6 +21,10 @@ export default {
   },
   methods: {
     sendComment () {
+      if (this.name === '' || this.content === '') {
+        alert('输入信息不完善')
+        return
+      }
       this.$emit('send', this.content, this.name)
       this.content = ''
       this.name = ''
