@@ -8,15 +8,22 @@ import NProgress from 'nprogress'
 Vue.config.productionTip = false
 NProgress.inc(0.2)
 NProgress.configure({ easing: 'ease', speed: 500, showSpinner: false })
-axios.defaults.baseURL = 'http://139.9.137.102:80/'
-axios.interceptors.request.use(config => {
+axios.defaults.baseURL = 'http://localhost:8080/'
+router.beforeEach((to, from, next) => {
+  NProgress.start()
+  next()
+})
+router.afterEach(() => {
+  NProgress.done() // 结束 Progress
+})
+/* axios.interceptors.request.use(config => {
   NProgress.start()
   return config
 })
 axios.interceptors.response.use(config => {
   NProgress.done()
   return config
-})
+}) */
 Vue.directive('highlight', function (el) {
   const blocks = el.querySelectorAll('pre code')
   blocks.forEach((block) => {
