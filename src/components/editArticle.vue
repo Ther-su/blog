@@ -27,12 +27,13 @@
       <input type="file" id="input-file" @change="imgChange($event)" v-show="false" accept="image/*">
       <label for="input-file">
         <div class="img-box">
-          <img :src="article.base64Img">
+          <img :src="article.img">
         </div>
       </label>
       <div class="tip-text">文章内容：</div>
     </div>
-    <mavon-editor @change="change" class="editor"></mavon-editor>
+    <mavon-editor @change="change" class="editor" :autofocus="false" :boxShadow="false" v-model="article.content" v-if="type===1"></mavon-editor>
+    <mavon-editor @change="change" class="editor" :autofocus="false" :boxShadow="false" v-else></mavon-editor>
     <div class="btn-box">
       <button :class="['btn',{'btn-hover':isHover}]" @mouseenter="isHover=true"
       @mouseleave="isHover=false" @click="editSubmit">点击提交</button>
@@ -49,6 +50,7 @@ export default {
       article: {}
     }
   },
+  props: ['type'],
   components: {
     mavonEditor
   },
@@ -56,14 +58,13 @@ export default {
     change (value, render) {
       // console.log(render)
       this.article.content = render
-      console.log(this.article.content)
     },
     imgChange (e) {
       const img = e.target.files[0]
       const reader = new FileReader()
       reader.readAsDataURL(img)
       reader.onload = () => {
-        this.article.base64Img = reader.result
+        this.article.img = reader.result
       }
     },
     editSubmit () {
@@ -85,14 +86,14 @@ export default {
 <style scoped>
 .main-box {
   box-sizing: border-box;
-  padding: 2vw 3vw;
+  padding: 0 3vw;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   width: 60vw;
   height: 58vh;
-  margin: 8vh auto;
+  margin: 2vh auto;
 }
 .btn-box {
   width: 60vw;
@@ -115,7 +116,7 @@ input,select {
 }
 .editor {
   width: 60vw;
-  margin: 8vh auto;
+  margin: 2vh auto;
 }
 .btn {
   width: 5vw;

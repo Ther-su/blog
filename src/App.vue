@@ -61,6 +61,9 @@ export default {
     }
   }
   @media screen and (min-width: 600px) {
+     html {
+      min-width: 1500px;
+    }
     .container {
       position: relative;
       width: 100vw;

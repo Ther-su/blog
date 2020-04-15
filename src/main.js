@@ -26,6 +26,23 @@ axios.interceptors.response.use(config => {
   NProgress.done()
   return config
 }) */
+axios.interceptors.request.use(config => {
+  config.headers.Authorization = window.sessionStorage.getItem('token')
+  return config
+})
+
+axios.interceptors.response.use(
+  res => {
+    return res
+  },
+  err => {
+    switch (err.response.status) {
+      case 403:
+        err.message = '无权访问'
+    }
+    return Promise.reject(err)
+  }
+)
 Vue.directive('highlight', function (el) {
   const blocks = el.querySelectorAll('pre code')
   blocks.forEach((block) => {
