@@ -25,7 +25,7 @@ const routes = [
     redirect: '/edit',
     children: [
       { path: '/edit', component: editPage },
-      { path: '/modify', component: modifyPage },
+      { path: '/modify/:id', component: modifyPage },
       { path: '/manage', component: managePage }
     ]
   }
@@ -35,4 +35,11 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  if (to.path === '/manage' || to.path.indexOf('/modify') !== -1 || to.path === '/edit') {
+    const tokenStr = window.sessionStorage.getItem('token')
+    if (!tokenStr) return next('/login')
+  }
+  next()
+})
 export default router

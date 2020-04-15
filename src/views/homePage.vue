@@ -26,6 +26,7 @@ export default {
     getCatelogList () {
       this.$http.get('/catalogList')
         .then((ret) => {
+          console.log(ret)
           this.catalogList = ret.data
         })
     }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <edit-article @submit="editSubmit" ref="editArticle"></edit-article>
+    <edit-article @submit="editSubmit" ref="editArticle" :type="2"></edit-article>
   </div>
 </template>
 <script>
@@ -16,17 +16,15 @@ export default {
         content: '',
         type: '',
         summary: '',
-        base64Img: require('../assets/upload.png')
+        img: require('../assets/upload.png')
       }
     }
   },
   mounted () {
-    console.log(this.$refs.editArticle)
     this.$refs.editArticle.article = this.article
   },
   methods: {
     editSubmit (article) {
-      console.log(article)
       this.$http.post('/edit', article)
         .then((ret) => {
           if (ret.status !== 200) {
