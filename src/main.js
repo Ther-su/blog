@@ -10,7 +10,7 @@ import 'nprogress/nprogress.css'
 Vue.config.productionTip = false
 NProgress.inc(0.2)
 NProgress.configure({ easing: 'ease', speed: 500, showSpinner: false })
-axios.defaults.baseURL = 'http://localhost:8080/'
+axios.defaults.baseURL = 'http://ther.shenque.top/'
 router.beforeEach((to, from, next) => {
   NProgress.start()
   next()
@@ -31,18 +31,19 @@ axios.interceptors.request.use(config => {
   return config
 })
 
-axios.interceptors.response.use(
-  res => {
-    return res
-  },
-  err => {
-    switch (err.response.status) {
-      case 403:
-        err.message = '无权访问'
-    }
-    return Promise.reject(err)
-  }
-)
+// axios.interceptors.response.use(
+//   res => {
+//     return res
+//   },
+//   err => {
+//     return err
+//     // switch (err.response.status) {
+//     //   case 403:
+//     //     err.message = '无权访问'
+//     // }
+//     // return Promise.reject(err)
+//   }
+// )
 Vue.directive('highlight', function (el) {
   const blocks = el.querySelectorAll('pre code')
   blocks.forEach((block) => {
