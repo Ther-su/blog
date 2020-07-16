@@ -10,6 +10,8 @@
       </div>
     </div>
     <loading v-show="$store.state.isLoading"></loading>
+    <modal-hint :isShowModalHint="$store.state.modalHint.isShow"
+    :text="$store.state.modalHint.text"></modal-hint>
   </div>
 </template>
 
@@ -19,13 +21,15 @@ import menuList from './components/menu.vue'
 import imgBox from './components/imgBox.vue'
 import infoBox from './components/infoBox.vue'
 import clickBox from './components/clickBox.vue'
+import modalHint from './components/modalHint'
 export default {
   components: {
     menuList,
     imgBox,
     infoBox,
     clickBox,
-    loading
+    loading,
+    modalHint
   },
   mounted () {
     setTimeout(() => {

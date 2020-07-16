@@ -33,10 +33,10 @@ export default {
     getCommentList () {
       this.$http.get(`/comment/${this.$route.params.id}`)
         .then((ret) => {
-          if (ret.status !== 200) {
-            alert('获取评论失败')
-          }
           this.comment = ret.data
+        })
+        .catch(err => {
+          this.$store.commit('setModalHint', { text: err.response.data.message })
         })
     },
     sendComment (content, name) {
@@ -51,11 +51,13 @@ export default {
         }
         this.$http.post('/comment', info)
           .then((ret) => {
-            if (ret.status !== 200) {
-              alert('上传评论失败')
-            }
+            info.id = ret.data.id
             this.comment.push(info)
             this.$emit('add')
+            this.$store.commit('setModalHint', { text: '发送评论成功' })
+          })
+          .catch(err => {
+            this.$store.commit('setModalHint', { text: err.response.data.message })
           })
       } else {
         const info = {
@@ -69,11 +71,13 @@ export default {
         }
         this.$http.post('/reply', info)
           .then((ret) => {
-            if (ret.status !== 200) {
-              alert('上传评论失败')
-            }
+            info.id = ret.data.id
             this.comment[this.index].apply.push(info)
             this.$emit('add')
+            this.$store.commit('setModalHint', { text: '发送评论成功' })
+          })
+          .catch(err => {
+            this.$store.commit('setModalHint', { text: err.response.data.message })
           })
       }
     },

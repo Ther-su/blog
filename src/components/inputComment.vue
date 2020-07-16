@@ -135,7 +135,7 @@ export default {
   .edit-box {
     padding: 3vw;
     box-sizing: border-box;
-    height: 65vh;
+    height: 70vh;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
