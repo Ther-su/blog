@@ -26,8 +26,10 @@ export default {
     getCatelogList () {
       this.$http.get('/catalogList')
         .then((ret) => {
-          console.log(ret)
           this.catalogList = ret.data
+        })
+        .catch(err => {
+          this.$store.commit('setModalHint', { text: err.response.data.message })
         })
     }
   }

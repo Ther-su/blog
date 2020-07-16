@@ -23,28 +23,10 @@ export default {
     modifySubmit (article) {
       this.$http.put(`/article/${this.$route.params.id}`, article)
         .then((ret) => {
-          alert('修改成功')
+          this.$store.commit('setModalHint', { text: '修改成功' })
         })
-        .catch((error) => {
-          if (error.response) {
-            // The request was made and the server responded with a status code
-            // that falls out of the range of 2xx
-            alert('aa')
-            console.log(error)
-            console.log(error.message)
-            console.log(error.response)
-            console.log(error.response.status)
-            console.log(error.response.headers)
-          } else if (error.request) {
-            // The request was made but no response was received
-            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-            // http.ClientRequest in node.js
-            console.log(error.request)
-          } else {
-            // Something happened in setting up the request that triggered an Error
-            console.log('Error', error.message)
-          }
-          console.log(error.config)
+        .catch((err) => {
+          this.$store.commit('setModalHint', { text: err.response.data.message })
         })
     },
     returnManage () {
@@ -55,29 +37,10 @@ export default {
     getArticle () {
       this.$http.get(`/modifyarticle/${this.$route.params.id}`)
         .then((ret) => {
-          console.log(ret)
-          console.log(ret.status)
           this.$refs.modifyArticle.article = ret.data
-          // this.article = ret.data
-          // console.log(this.article)
         })
-        .catch((error) => {
-          if (error.response) {
-            // The request was made and the server responded with a status code
-            // that falls out of the range of 2xx
-            console.log(error.response.data)
-            console.log(error.response.status)
-            console.log(error.response.headers)
-          } else if (error.request) {
-            // The request was made but no response was received
-            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-            // http.ClientRequest in node.js
-            console.log(error.request)
-          } else {
-            // Something happened in setting up the request that triggered an Error
-            console.log('Error', error.message)
-          }
-          console.log(error.config)
+        .catch((err) => {
+          this.$store.commit('setModalHint', { text: err.response.data.message })
         })
     }
   }

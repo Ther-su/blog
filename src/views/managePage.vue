@@ -37,21 +37,20 @@ export default {
     deleteArticle (id) {
       this.$http.delete(`/article/${id}`)
         .then((ret) => {
-          if (ret.status !== 200) {
-            alert('删除文章失败')
-          }
           this.getArticlesList()
-          alert('删除文章成功')
+          this.$store.commit('setModalHint', { text: '删除文章成功' })
+        })
+        .catch(err => {
+          this.$store.commit('setModalHint', { text: err.response.data.message })
         })
     },
     getArticlesList () {
       this.$http.get('/catalogList')
         .then((ret) => {
-          if (ret.status !== 200) {
-            alert('获取失败')
-          }
-          // alert('请求成功')
           this.articles = ret.data
+        })
+        .catch(err => {
+          this.$store.commit('setModalHint', { text: err.response.data.message })
         })
     }
   }
