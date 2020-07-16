@@ -33,7 +33,7 @@
       <div class="tip-text">文章内容：</div>
     </div>
     <mavon-editor @change="change" class="editor" :autofocus="false" :boxShadow="false" v-model="article.content" v-if="type===1"></mavon-editor>
-    <mavon-editor @change="change" class="editor" :autofocus="false" :boxShadow="false" v-else></mavon-editor>
+    <mavon-editor @change="change" class="editor" :autofocus="false" :boxShadow="false" v-else @imgAdd="$imgAdd" ref="mdImg"></mavon-editor>
     <div class="btn-box">
       <button :class="['btn',{'btn-hover':isHover}]" @mouseenter="isHover=true"
       @mouseleave="isHover=false" @click="editSubmit">点击提交</button>
@@ -55,6 +55,19 @@ export default {
     mavonEditor
   },
   methods: {
+    $imgAdd (pos, $file) {
+      const that = this
+      const reader = new FileReader()
+      reader.readAsDataURL($file)
+      reader.onload = () => {
+        that.$http.post('/article/img', {
+          img: reader.result
+        })
+          .then((ret) => {
+            that.$refs.mdImg.$img2Url(pos, ret.data.url)
+          })
+      }
+    },
     change (value, render) {
       // console.log(render)
       this.article.content = render

@@ -1,4 +1,7 @@
 module.exports = {
+  devServer: {
+    open: true
+  },
   chainWebpack: config => {
     config.set('externals', {
       vue: 'Vue',

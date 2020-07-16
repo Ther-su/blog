@@ -1,8 +1,8 @@
 <template>
   <div class="detail-box">
-    <div class="people">发表于</div>
-    <div class="time">{{time}}</div>
-    <div class="comment">有{{comment}}条评论</div>
+    <i class="iconfont icon-geren"></i><div class="people">发表于</div>
+    <i class="iconfont icon-pinglun"></i><div class="time">{{time}}</div>
+    <i class="iconfont icon-shijian"></i><div class="comment">有{{comment}}条评论</div>
   </div>
 </template>
 <script>
@@ -19,13 +19,19 @@ export default {
     color:#555;
     font-size: 3.5vw;
   }
-  .people:before{
+  .people-box{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  /* .people:before{
     content: '';
     background: url(../assets/people.png);
     width: 3vw;
     height: 3vw;
     display: inline-block;
     background-size:cover;
+    text-align: center;
   }
   .time:before{
     content: '';
@@ -42,7 +48,7 @@ export default {
     height: 3vw;
     display: inline-block;
     background-size:cover;
-  }
+  } */
 }
 @media screen and (min-width: 600px) {
   .detail-box {
@@ -52,7 +58,7 @@ export default {
     color:#555;
     font-size: 1vw;
   }
-  .people:before{
+  /* .people:before{
     content: '';
     background: url(../assets/people.png);
     width: 1.2vw;
@@ -75,6 +81,6 @@ export default {
     height: 1vw;
     display: inline-block;
     background-size:cover;
-  }
+  } */
 }
 </style>

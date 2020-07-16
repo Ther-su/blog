@@ -9,7 +9,7 @@
   width: 100vw;
   height: 80vh;
   background-image: url(../assets/background.jpg);
-  background-size: cover;
+  background-size: auto 100%;
   background-position: center 50%;
 }
 </style>

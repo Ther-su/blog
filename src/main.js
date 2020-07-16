@@ -4,11 +4,12 @@ import router from './router'
 import axios from 'axios'
 import hljs from 'highlight.js'
 import NProgress from 'nprogress'
+import store from './store'
 
 Vue.config.productionTip = false
 NProgress.inc(0.2)
 NProgress.configure({ easing: 'ease', speed: 500, showSpinner: false })
-axios.defaults.baseURL = 'http://localhost:8080/'
+axios.defaults.baseURL = 'http://localhost:8081/'
 router.beforeEach((to, from, next) => {
   NProgress.start()
   next()
@@ -26,14 +27,17 @@ axios.interceptors.response.use(config => {
 }) */
 axios.interceptors.request.use(config => {
   config.headers.Authorization = window.sessionStorage.getItem('token')
+  store.commit('setIsLoading', true)
   return config
 })
 
 axios.interceptors.response.use(
   res => {
+    store.commit('setIsLoading', false)
     return res
   },
   err => {
+    store.commit('setIsLoading', false)
     switch (err.response.status) {
       case 403:
         err.message = '无权访问'
@@ -73,6 +77,7 @@ Vue.filter('typeFormat', function (val) {
 })
 Vue.prototype.$http = axios
 new Vue({
+  store,
   router,
   render: h => h(App)
 }).$mount('#app')
