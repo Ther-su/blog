@@ -7,7 +7,38 @@
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
     <script type="text/javascript" src="/live2dw/lib/L2Dwidget.min.js"></script>
+    <script src="https://cdn.staticfile.org/vue/2.5.22/vue.min.js"></script>
+    <script src="https://cdn.staticfile.org/vue-router/3.0.1/vue-router.min.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+    <script src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+    <script src="https://cdn.bootcss.com/highlight.js/9.18.1/highlight.min.js"></script>
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1946620_258vq7pu8ik.css">
   </head>
+  <style>
+    .text_popup {
+	animation: textPopUp 1.8s;
+	position: absolute;
+	user-select: none;
+	white-space: nowrap;
+	z-index: 999;
+}
+
+@keyframes textPopUp {
+	0% {
+		opacity: 1; 
+	}
+	100% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 0.6;
+	}
+	100% {
+		transform: translateY(-140px);
+	}
+}
+  </style>
   <body>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
@@ -15,4 +46,51 @@
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
+  <script>
+    var getRandomColor = function() {
+	return '#' + (function(h) {
+		return new Array(7 - h.length).join("0") + h
+	})((Math.random() * 0x1000000 << 0).toString(16))
+}
+var showText = function(textArr) {
+	if (!textArr || textArr.length == 0) {
+		return;
+	}
+	var index = 0;
+	document.documentElement.addEventListener('click', function(e) {
+		var x = e.pageX;
+		var y = e.pageY;
+		var text = document.createElement('span');
+		text.setAttribute('class', 'text_popup');
+		this.appendChild(text);
+		if (textArr[index]) {
+			text.innerHTML = textArr[index];
+		} else {
+			index = 0;
+			text.innerHTML = textArr[index];
+		}
+		text.style.color = getRandomColor();
+		text.addEventListener('animationend', function() {
+			text.parentNode.removeChild(text);
+		}, false)
+		if (x < text.clientWidth) {
+			text.style.left = x + 'px';
+		} else if (text.clientWidth > (document.documentElement.clientWidth - x)) {
+			text.style.left = (x - text.clientWidth) + 'px';
+		} else {
+			text.style.left = (x - text.clientWidth / 2) + 'px';
+		}
+
+		text.style.top = (y - text.clientHeight / 2) + 'px';
+		index++;
+	}, false)
+}
+showText(['~❤行也欢喜❤~','~❤停也欢喜❤~','~❤眉目带笑❤~','~❤醉如春风❤~','~❤浮生如梦❤~','~❤岁月如舟❤~','❤❤',
+'❤我一直渴望有一个人❤','❤能够岁月经年仍拉住我不放❤','❤不许我堕落❤','❤不许我沉沦❤','❤不许我随波逐流❤','❤❤',
+'❤写尽千山 落笔是你❤','❤望尽星辰 美丽是你❤','❤书尽泛黄 扉页是你❤','❤千山万水 归处是你❤','❤❤',
+'❤遇见你开始❤','❤眉眼弯弯 星河皆你❤','❤春风十里不如你❤','❤梦里梦外都是你❤','❤❤',
+'❤你笑起来的时候❤','❤眼里住满了星辰❤','❤惊艳了时光❤','❤亦温柔了岁月❤',
+'❤愿你温柔如初❤','❤深情不被辜负❤','❤愿你后来安好❤','❤即使与我无关❤','❤愿你走出半生❤','❤归来仍是少年❤',
+'❤愿你前程似锦❤','❤而我一无所知❤','❤愿你遍历山河❤','❤觉得人间值得❤','❤愿你眼角带笑❤','❤明月不染眉悄❤'])
+  </script>
 </html>

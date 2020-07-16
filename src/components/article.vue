@@ -43,6 +43,10 @@ export default {
     margin: 13vh auto;
     width: 88vw;
   }
+  .article-box >>> img {
+    width: 80vw;
+    height: auto;
+  }
   .label {
     width:20vw;
     text-align: center;
@@ -79,6 +83,10 @@ export default {
   .article-box {
     margin: 18vh auto;
     width: 40vw;
+  }
+  .article-box >>> img {
+    width: 40vw;
+    height: auto;
   }
   .label {
     width:8vw;

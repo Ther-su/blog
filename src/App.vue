@@ -9,10 +9,12 @@
         <click-box></click-box>
       </div>
     </div>
+    <loading v-show="$store.state.isLoading"></loading>
   </div>
 </template>
 
 <script>
+import loading from '../src/components/loading'
 import menuList from './components/menu.vue'
 import imgBox from './components/imgBox.vue'
 import infoBox from './components/infoBox.vue'
@@ -22,7 +24,8 @@ export default {
     menuList,
     imgBox,
     infoBox,
-    clickBox
+    clickBox,
+    loading
   },
   mounted () {
     setTimeout(() => {
@@ -33,7 +36,7 @@ export default {
         tagMode: false,
         debug: false,
         model: { jsonPath: '../live2dw/live2d-widget-model-koharu/assets/koharu.model.json' },
-        display: { position: 'right', width: 200, height: 300 },
+        display: { position: 'right', width: 140, height: 210 },
         mobile: { show: true },
         log: false
       })
