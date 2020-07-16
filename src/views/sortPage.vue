@@ -38,6 +38,9 @@ export default {
           }
           this.sortList = ret.data
         })
+        .catch(err => {
+          this.$store.commit('setModalHint', { text: err.response.data.message })
+        })
     }
   }
 }

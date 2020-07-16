@@ -28,11 +28,10 @@ export default {
     getArticle () {
       this.$http.get(`/article/${this.$route.params.id}`)
         .then((ret) => {
-          if (ret.status !== 200) {
-            alert('请求失败')
-          }
-          // alert('请求成功')
           this.article = ret.data
+        })
+        .catch(err => {
+          this.$store.commit('setModalHint', { text: err.response.data.message })
         })
     }
   }

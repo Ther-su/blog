@@ -69,7 +69,6 @@ export default {
       }
     },
     change (value, render) {
-      // console.log(render)
       this.article.content = render
     },
     imgChange (e) {

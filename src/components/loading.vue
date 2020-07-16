@@ -28,7 +28,7 @@ export default {
   top: 0;
   left: 0;
   background-color: rgba(255,255,255,0.883);
-  z-index: 999;
+  z-index: 888;
 }
 img {
   width: 100%;

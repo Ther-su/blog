@@ -28,12 +28,12 @@ export default {
         username: this.username,
         password: this.password
       }).then((ret) => {
-        if (ret.status !== 200) {
-          alert('登录失败')
-        }
         window.sessionStorage.setItem('token', ret.data.token)
         this.$router.push('/manage')
       })
+        .catch(err => {
+          this.$store.commit('setModalHint', { text: err.response.data.message })
+        })
     }
   }
 }

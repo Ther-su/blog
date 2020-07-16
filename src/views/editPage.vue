@@ -27,10 +27,10 @@ export default {
     editSubmit (article) {
       this.$http.post('/edit', article)
         .then((ret) => {
-          if (ret.status !== 200) {
-            alert('上传博文失败')
-          }
-          alert('上传成功')
+          this.$store.commit('setModalHint', { text: '上传博文成功' })
+        })
+        .catch(err => {
+          this.$store.commit('setModalHint', { text: err.response.data.message })
         })
     }
   }
