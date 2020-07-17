@@ -46,8 +46,8 @@ export default {
           content: content,
           time: Date.now(),
           apply: [],
-          aid: this.$route.params.id,
-          comment: this.num + 1
+          aid: this.$route.params.id
+          // comment: this.num + 1
         }
         this.$http.post('/comment', info)
           .then((ret) => {
@@ -66,7 +66,8 @@ export default {
           content: content,
           time: Date.now(),
           rid: this.rid,
-          comment: this.num + 1
+          aid: this.$route.params.id
+          // comment: this.num + 1
           // apply: []
         }
         this.$http.post('/reply', info)

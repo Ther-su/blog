@@ -11,7 +11,7 @@ import store from './store'
 Vue.config.productionTip = false
 NProgress.inc(0.2)
 NProgress.configure({ easing: 'ease', speed: 500, showSpinner: false })
-axios.defaults.baseURL = 'http://localhost:8081/'
+axios.defaults.baseURL = 'http://www.shenque.top/'
 router.beforeEach((to, from, next) => {
   NProgress.start()
   next()
