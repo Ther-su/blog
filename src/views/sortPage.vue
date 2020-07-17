@@ -33,9 +33,6 @@ export default {
     getSortList () {
       this.$http.get(`/sort/${this.$route.params.type}`)
         .then((ret) => {
-          if (ret.status !== 200) {
-            alert('获取分类失败')
-          }
           this.sortList = ret.data
         })
         .catch(err => {
