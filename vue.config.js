@@ -7,7 +7,8 @@ module.exports = {
       vue: 'Vue',
       'vue-router': 'VueRouter',
       axios: 'axios',
-      nprogress: 'NProgress'
+      nprogress: 'NProgress',
+      vuex: 'Vuex'
     })
     config.plugin('html')
       .tap((args) => {

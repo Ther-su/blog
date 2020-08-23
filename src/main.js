@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import axios from 'axios'
 import hljs from 'highlight.js'
+import 'highlight.js/styles/atom-one-dark.css'
 import NProgress from 'nprogress'
 import store from './store'
 
@@ -12,6 +13,7 @@ NProgress.configure({ easing: 'ease', speed: 500, showSpinner: false })
 axios.defaults.baseURL = 'http://www.shenque.top/'
 router.beforeEach((to, from, next) => {
   NProgress.start()
+  window.scrollTo(0, 0)
   next()
 })
 router.afterEach(() => {
@@ -48,7 +50,7 @@ axios.interceptors.response.use(
 Vue.directive('highlight', function (el) {
   const blocks = el.querySelectorAll('pre code')
   blocks.forEach((block) => {
-    block.style.backgroundColor = '#E9ECEF'
+    // block.style.backgroundColor = '#E9ECEF'
     hljs.highlightBlock(block)
   })
 })
