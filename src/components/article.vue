@@ -21,6 +21,11 @@ export default {
   props: ['article']
 }
 </script>
+<style>
+  p,h1,h2,h3,h4,h5,code,pre,ul,li,table{
+    margin-bottom: 4vh;
+  }
+</style>
 <style scoped>
 @media screen and (max-width: 600px) {
   .main-box {
@@ -40,7 +45,7 @@ export default {
     color: #444;
   }
   .article-box {
-    margin: 13vh auto;
+    margin: 10vh auto;
     width: 88vw;
   }
   .article-box >>> img {
