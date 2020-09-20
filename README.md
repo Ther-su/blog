@@ -1,6 +1,6 @@
 # vue博客
 
-
+prod分支里的代码用了webpack的external减少打包体积
 
 ## Project setup
 ```
